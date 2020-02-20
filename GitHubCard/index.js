@@ -131,11 +131,35 @@ function makeCard (user) {
   
   //Stretch
   const calendar = document.createElement('div');
-  //calendar.classList.add(user.login);
   calendar.classList.add('calendar');
   calendar.textContent = `Loading the data just for you & ${user.login}`;
   cardInfo.appendChild(calendar);
   GitHubCalendar(calendar, user.login, { responsive: true });
+  calendar.style.display = `none`;
+  
+  let closed = true;
+  const moreButton = document.createElement('i');
+  moreButton.style.position = `relative`;
+  moreButton.style.color = `darkturquoise`;
+  moreButton.style.left = `1rem`;
+  moreButton.style.margin = `5px`;
+  moreButton.classList.add('fas');
+  moreButton.classList.add('fa-2x');
+  moreButton.classList.add('fa-plus-circle');
+  cardInfo.appendChild(moreButton);
+  moreButton.addEventListener('click',()=> {
+        if (closed) {
+          calendar.style.display = `inline-block`;
+          moreButton.classList.remove('fa-plus-circle');
+          moreButton.classList.add('fa-minus-circle');
+          closed = false;
+        } else {
+          calendar.style.display = `none`;
+          moreButton.classList.remove('fa-minus-circle');
+          moreButton.classList.add('fa-plus-circle');
+          closed = true;
+        }
+    });
   
   return card;
 }
