@@ -21,7 +21,11 @@ function displayCard (username) {
       // handle success
       console.log(response.data);
       const card = makeCard(response.data);
-      cardContainer.appendChild(card);
+      if (username === primeUser) {
+        cardContainer.insertBefore(card, cardContainer.childNodes[0]);
+      } else {
+        cardContainer.appendChild(card);
+      }
     })
     .catch(function (error) {
       // handle error
@@ -124,6 +128,15 @@ function makeCard (user) {
     bio.textContent = `Bio: ${user.bio}`;
     cardInfo.appendChild(bio);
   }
+  
+  //Stretch
+  const calendar = document.createElement('div');
+  //calendar.classList.add(user.login);
+  calendar.classList.add('calendar');
+  calendar.textContent = `Loading the data just for you & ${user.login}`;
+  cardInfo.appendChild(calendar);
+  GitHubCalendar(calendar, user.login, { responsive: true });
+  
   return card;
 }
 
