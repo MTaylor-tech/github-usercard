@@ -2,6 +2,28 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+//const axios = require('axios');
+const cardContainer = document.querySelector('.cards');
+// Make a request for a user with a given ID
+
+
+function displayCard (username) {
+  axios.get(`https://api.github.com/users/${username}`)
+    .then(function (response) {
+      // handle success
+      console.log(response.data);
+      const card = makeCard(response.data);
+      cardContainer.appendChild(card);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+}
+
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -24,7 +46,14 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['Ryan-Erickson',
+                        'bdrummo6',
+                        'Ashleylou825',
+                        'tetondan',
+                        'dustinmyers',
+                        'justsml',
+                        'luishrd',
+                        'bigknell'];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -45,6 +74,47 @@ const followersArray = [];
 </div>
 
 */
+function makeCard (user) {
+  const card = document.createElement('div');
+  card.classList.add('card');
+  const img = document.createElement('img');
+  img.src = user.avatar_url;
+  card.appendChild(img);
+  const cardInfo = document.createElement('div');
+  cardInfo.classList.add('card-info');
+  card.appendChild(cardInfo);
+  
+  const name = document.createElement('h3');
+  name.classList.add('name');
+  name.textContent = user.name;
+  cardInfo.appendChild(name);
+  const username = document.createElement('p');
+  username.classList.add('username');
+  username.textContent = user.login;
+  cardInfo.appendChild(username);
+  const profile = document.createElement('p');
+  profile.textContent = `Profile: `;
+  const profileLink = document.createElement('a');
+  profileLink.href = user.html_url;
+  profileLink.textContent = user.html_url;
+  profile.appendChild(profileLink);
+  cardInfo.appendChild(profile);
+  const followers = document.createElement('p');
+  followers.textContent = `Followers: ${user.followers}`;
+  cardInfo.appendChild(followers);
+  const following = document.createElement('p');
+  following.textContent = `Following: ${user.following}`;
+  cardInfo.appendChild(following);
+  if (user.bio != null) {
+    const bio = document.createElement('p');
+    bio.textContent = `Bio: ${user.bio}`;
+    cardInfo.appendChild(bio);
+  }
+  return card;
+}
+
+displayCard('MTaylor-tech');
+followersArray.forEach(u=>displayCard(u));
 
 /* List of LS Instructors Github username's: 
   tetondan
