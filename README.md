@@ -32,7 +32,7 @@ and connect the pieces.
 
 **Follow these steps for completing your project.**
 
-* [ ] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's  Repo). **Please don't merge your own pull request**
+* [x] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's  Repo). **Please don't merge your own pull request**
 * [ ] Add your project manager as a reviewer on the pull-request
 * [ ] Your project manager will count the project as complete by merging the branch back into master.
 
@@ -55,7 +55,7 @@ and connect the pieces.
 
 ### Stretch Goals:
 
-* Instead of manually creating a list of followers, do it programmatically.
+* [x] Instead of manually creating a list of followers, do it programmatically.
  Create a function that requests the followers data from the API after it 
  has received your data and create a card for each of your followers. 
  Hint: you can chain promises.
@@ -63,7 +63,7 @@ and connect the pieces.
 * Look into adding more info as an expanding card. You will need to create
  some new CSS and a button that expands and contracts the card. 
 
-* Look into adding your GitHub contribution graph. There are a number of
+* [x] Look into adding your GitHub contribution graph. There are a number of
  different ways of doing this, this Stack Overflow discussion will get
   you started: https://stackoverflow.com/questions/34516592/embed-github-contributions-graph-in-website
 
