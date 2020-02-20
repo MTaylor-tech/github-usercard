@@ -3,7 +3,15 @@
            https://api.github.com/users/<your name>
 */
 //const axios = require('axios');
+const primeUser = 'MTaylor-tech';
 const cardContainer = document.querySelector('.cards');
+let followersArray = [  'tetondan',
+                        'dustinmyers',
+                        'justsml',
+                        'luishrd',
+                        'bigknell'];
+                        
+                        
 // Make a request for a user with a given ID
 
 
@@ -20,8 +28,22 @@ function displayCard (username) {
       console.log(error);
     })
     .then(function () {
-      // always executed
+     // run after
     });
+}
+
+function getFollowers (username) {
+  let followers = [];
+  axios.get(`https://api.github.com/users/${username}/followers`)
+        .then(function (response) {
+          followers = response.data.map(f=>f.login);
+          followers.forEach(u=>displayCard(u));
+          return followers;
+        })
+        .catch(function (error) {
+          console.log(error);
+          return null;
+        });
 }
 
 
@@ -46,14 +68,6 @@ function displayCard (username) {
           user, and adding that card to the DOM.
 */
 
-const followersArray = ['Ryan-Erickson',
-                        'bdrummo6',
-                        'Ashleylou825',
-                        'tetondan',
-                        'dustinmyers',
-                        'justsml',
-                        'luishrd',
-                        'bigknell'];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -113,8 +127,10 @@ function makeCard (user) {
   return card;
 }
 
-displayCard('MTaylor-tech');
+displayCard(primeUser);
+getFollowers(primeUser);
 followersArray.forEach(u=>displayCard(u));
+
 
 /* List of LS Instructors Github username's: 
   tetondan
